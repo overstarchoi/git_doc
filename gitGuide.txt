@@ -20,3 +20,41 @@ hello-git이라는 디렉토리를 만들고 그 디렉토리 안으로 이동�
 hello-git 디렉토리에 .git 이라는 디렉토리가 만들어진다.
 hello-git이 working tree이고 .git에 stage와 repository가 있다.
 스테이지 내용은 .git/index 파일에 저장되고, commit된 내용은 .git/HEAD 파일에 저장된다.
+
+파일 만들어서 staging하고 commit하기.
+	1. 파일을 하나 생성한다. 이 파일은 아직 한번도 staging/commit 된적이 없으므로
+		untracked files라 한다.
+		test.txt 파일은 만든다. 아직 untracked files에 속한다.
+		git status를 입력하면 test.txt는 untracked files라고 표시된다.
+	2. 파일을 staging한다. "stage에 올린다.", "index에 등록한다."로 표현하기도 한다.
+		git add test.txt 로 test.txt 파일을 staging 한다.
+		git commit -a test.txt도 동일한 동작을 한다.(라고 생각된다.)
+		git status를 입력하면 test.txt는 new file이라 표시되고 아직 commit이
+		안되어 있다고 표시된다.
+		Note. git add 뒤에 파일이름 대신 '.'을 붙이면 working tree에 있는 파일 중에
+		수정되었고 아직 staging되지 않은 모든 파일을 한꺼번에 stage에 올린다.
+	3. stage에 올린 파일들을 commit한다.
+		git commit -m 'message' 를 통해 stage에 올려진 파일들을 commit한다.
+		'message'는 commit할때 작성하는 문자열이다. commit되는 파일들에대한 수정사항이나
+		관련 내용을 적으면 된다.
+		git status를 입력하면 commit할 내용이 없으며 working tree가 clean하다고 표시된다.
+		git log를 입력하면 commit한 내역이 나온다.
+		commit에 관련된 파일까지 살펴보려면 git log --stat를 입력한다.
+
+한번 commit한 파일은 tracked file이 되고 이 후로는 staging과 commit을 한꺼번에 할 수 있다.
+	git commit -am 'message'
+
+test.txt 파일 내용을 수정한 후 가장 최근에 commit되어 저장소에 저장된 내용과 어떻게 다른지
+확인 하려면 git diff를 입력한다.
+
+working tree에서 특정 파일이나 디렉토리를 버전관리에서 제외하려면 .gitignore 파일을 만들고
+파일에 제외하려는 파일 이름과 디렉토리 이름을 적어 놓으면 된다. 예를 들어 working directory에
+파일 a.txt와 디렉토리 tmp가 있고 이 파일과 디렉토리를 버전관리에서 제외하려면 .gitignore 파일에
+다음과 같은 내용을 입력하면 된다.
+	a.txt
+	tmp/
+
+가장 최근에 commit한 message를 수정할 수 있다.
+git commit --amend를 입력하면 message를 수정할 수 있다.
+참고로 amend는 개정하다,수정하다 라는 뜻이다.
+
