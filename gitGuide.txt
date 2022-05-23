@@ -115,3 +115,40 @@ Note. git reset은 되돌아 가려는 hash를 지정하지만 git revert는 취
 그러면 revert 관련 메시지 작성창이 나오고 메시지 작성후 저장/종료하면 revert가 완료된다.
 revert된 commit은 삭제되지 않고 대신 해당 commit이 revert되었다는 새로운 commit이
 추가 된다. 그리고 working tree의 파일 내용도 변경된다.
+
+revert 관련 test
+	1. 파일에 1을 쓰고 message를 "test1"로 commit.
+	2. 파일에 2를 추가하고 'test2'로 commit.
+	3. 파일에 3을 추가하고 'test3'으로 commit. 현재 파일 내용은 다음과 같다.
+		1
+		2
+		3
+	4. 'test3'을 revert해서 'test2'로 이동.
+	5. 파일에 4를 추가하고 'test4'로 commit.
+	6. 파일에 5를 추가하고 'test5'로 commit.
+	7. 여기에서 테스트를 진행. 위 4번에서 'test3'을 revert했었다. 그래서 'test2'에서 
+		'test4'로 이동되었다. 여기에서 'test3'으로 갈 수 있는지 테스트 했다.
+		'test3'의 hash가 1234abcd...라고 했을때,
+			git reset --hard 1234abcd...
+		라고 입력하니 'test3'으로 이동하여 파일 내용이 다음과 같이 되었다.
+			1
+			2
+			3
+결론, revert한 곳으로 복구될 수 있다. 다만 git reset --hard를 사용했으므로 그 이후
+commit들은 모두 사라졌다.
+
+또 다른 테스트. revert한 것을 다시 revert하면 어떻게 될까?
+	1. 파일에 'a'를 쓰고 'add a'로 commit.
+	2. 'b'를 추가하고 'add b'로 commit.
+	3. 'c'를 추가하고 'add c'로 commit. 현재 파일 내용은 다음과 같다.
+		a
+		b
+		c
+	4. 'add c'를 revert한다. 그래서 파일 내용은 다음과 같아진다.
+		a
+		b
+	5. 'add c'를 revert한걸 다시 revert했더니 파일 내용이 다음과 같아졌다.
+		a
+		b
+		c
+결론, revert한걸 다시 revert하니 원래대로 되돌아 왔다. 물론 git log에는 그 내용이 다 남아 있다.
