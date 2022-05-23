@@ -89,3 +89,12 @@ commit 되돌리기.
 	최근 commit과 staging, 그리고 파일 수정 전 상태로 working tree를 
 	되돌린다. 되돌린 내용은 복구되지 않는다.
 	staging을 취소하고 commit을 변경한다. 현재 commit에 맞게 파일도 변경한다.
+
+특정 commit으로 되돌리기 - hash 사용.
+특정 commit으로 되돌리고 이 후에 commit된 내용을 지우려면 다음과 같이 한다.
+되돌리려는 commit의 hash가 60938b9a9c9cd850ca5b195d682e065bd1d555ad 인 경우,
+	git reset --hard 60938b9a9c9cd850ca5b195d682e065bd1d555ad
+그러면 hash값이 60938b9a9c9cd850ca5b195d682e065bd1d555ad 인 commit이 최신이 되고,
+working tree의 파일 내용도 변경된다. 만약 --hard 옵션을 빼면 최신 commit만 변경되고
+working tree의 파일 내용은 변경되지 않는다.
+	git reset 60938b9a9c9cd850ca5b195d682e065bd1d555ad
