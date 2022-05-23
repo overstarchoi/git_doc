@@ -58,3 +58,10 @@ working tree에서 특정 파일이나 디렉토리를 버전관리에서 제외
 git commit --amend를 입력하면 message를 수정할 수 있다.
 참고로 amend는 개정하다,수정하다 라는 뜻이다.
 
+working tree에서 수정한 파일 되돌리기.
+working tree에 있는 파일을 수정하였고 아직 staging을 안한 경우(staging을 안했으니 당연히
+commint도 안했다.) 수정된 파일을 가장 최근에 commit한 내용으로 되돌리려면 다음 명령을
+사용한다. 파일 이름이 check.txt 인 경우,
+	git restore check.txt 또는 git checkout -- check.txt
+이렇게 되돌린 파일은 복구가 되지 않는다.
+
