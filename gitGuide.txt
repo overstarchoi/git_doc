@@ -98,3 +98,20 @@ commit 되돌리기.
 working tree의 파일 내용도 변경된다. 만약 --hard 옵션을 빼면 최신 commit만 변경되고
 working tree의 파일 내용은 변경되지 않는다.
 	git reset 60938b9a9c9cd850ca5b195d682e065bd1d555ad
+
+commit 삭제하지 않고 되돌리기
+git reset은 특정 commit으로 되돌아 가면서 그 이후 commit들은 모두 삭제한다.
+commit을 취소하고 이전 commit으로 되돌아가지만 취소된 commit을 남겨 두려면
+git revert 명령을 사용한다.
+	=> 정확한 내용은 아직 잘 모르겠지만, 최신부터 하나씩 revert해나가야 한다.
+	=> 예를 들면 최신 2개를 취소하려면 revert를 2번 해야 한다. 그렇지 않고 
+	=> 한단계를 뛰어 넘어서 revert 해보니 이상한 에러가 나오더라. 에러가
+	=> 나왔을 때 revert를 취소하려면 git revert --abort를 입력하라고
+	=> 되어 잇어서 그렇게 해보니 취소가 되더라.
+Note. git reset은 되돌아 가려는 hash를 지정하지만 git revert는 취소하는 hash를 지정한다.
+
+취소하려는 commit의 hash가 de77d17437038a05d28a5e6ca8df4dbe9e4b2cf1 이라면
+	git revert de77d17437038a05d28a5e6ca8df4dbe9e4b2cf1
+그러면 revert 관련 메시지 작성창이 나오고 메시지 작성후 저장/종료하면 revert가 완료된다.
+revert된 commit은 삭제되지 않고 대신 해당 commit이 revert되었다는 새로운 commit이
+추가 된다. 그리고 working tree의 파일 내용도 변경된다.
