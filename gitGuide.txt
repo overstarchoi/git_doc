@@ -65,3 +65,10 @@ commint도 안했다.) 수정된 파일을 가장 최근에 commit한 내용으�
 	git restore check.txt 또는 git checkout -- check.txt
 이렇게 되돌린 파일은 복구가 되지 않는다.
 
+staging한 파일 되돌리기
+수정된 파일을 staging했을 때 staging을 취소하려면 다음 명령을 사용한다.
+	git reset HEAD check.txt 또는 git restore --staged check.txt
+git reset HEAD 인 경우 파일 이름을 지정하지 않으면 staging된 모든 파일을 stage에서 내린다.
+git restore --staged 인 경우 파일 이름을 지정해야 한다.
+
+
